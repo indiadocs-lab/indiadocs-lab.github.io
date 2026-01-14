@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Application</title>
+<style>
+body{font-family:Arial;background:#eef2ff}
+.card{background:white;width:400px;margin:20px auto;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:5px}
+button{background:#dc2626;color:white;border:none}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Application Letter</h2>
+
+<input id="n" placeholder="Your Name">
+<input id="r" placeholder="Reason">
+
+<button onclick="make()">Generate</button>
+
+<div id="res"></div>
+</div>
+
+<script>
+function make(){
+res.innerHTML=
+`Respected Sir,<br>
+I ${n.value} request for ${r.value}.<br>
+Thank you.`;
+}
+</script>
+
+</body>
+</html>

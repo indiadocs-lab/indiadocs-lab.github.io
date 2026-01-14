@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Resume</title>
+<style>
+body{font-family:Arial;background:#eef2ff}
+.card{background:white;width:400px;margin:20px auto;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:5px}
+button{background:#9333ea;color:white;border:none}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Resume Maker</h2>
+
+<input id="n" placeholder="Name">
+<input id="s" placeholder="Skills">
+<input id="e" placeholder="Education">
+
+<button onclick="mk()">Generate</button>
+
+<div id="show"></div>
+</div>
+
+<script>
+function mk(){
+show.innerHTML=
+`<b>Name:</b> ${n.value}<br>
+<b>Skills:</b> ${s.value}<br>
+<b>Education:</b> ${e.value}`;
+}
+</script>
+
+</body>
+</html>

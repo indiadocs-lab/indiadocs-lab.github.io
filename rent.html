@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rent Agreement</title>
+<style>
+body{font-family:Arial;background:#eef2ff}
+.card{background:white;width:400px;margin:20px auto;padding:20px;border-radius:10px}
+input,button{width:100%;padding:10px;margin:5px}
+button{background:#2563eb;color:white;border:none}
+#result{background:#f8fafc;padding:10px;margin-top:10px}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h2>Rent Agreement Generator</h2>
+
+<input id="o" placeholder="Owner Name">
+<input id="t" placeholder="Tenant Name">
+<input id="a" placeholder="Property Address">
+<input id="r" placeholder="Monthly Rent">
+<input id="d" placeholder="Duration">
+
+<button onclick="make()">Generate Agreement</button>
+
+<div id="result"></div>
+</div>
+
+<script>
+function make(){
+let o=o1.value,t=t1.value,a=a1.value,r=r1.value,d=d1.value;
+document.getElementById("result").innerHTML=
+`This rent agreement is made between <b>${o}</b> and <b>${t}</b>.
+Property address: ${a}.
+Monthly rent ₹${r}.
+Duration: ${d}.`;
+}
+</script>
+
+</body>
+</html>

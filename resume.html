@@ -1,35 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Resume</title>
+<title>Smart Resume Generator</title>
+
 <style>
-body{font-family:Arial;background:#eef2ff}
-.card{background:white;width:400px;margin:20px auto;padding:20px;border-radius:10px}
-input,button{width:100%;padding:10px;margin:5px}
-button{background:#9333ea;color:white;border:none}
+body{
+font-family:Arial;
+background:#f3f4f6;
+}
+
+.container{
+width:70%;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+input,textarea{
+width:100%;
+padding:10px;
+margin:8px 0;
+}
+
+button{
+background:#7c3aed;
+color:white;
+padding:12px;
+border:none;
+width:100%;
+cursor:pointer;
+}
+
+#resume{
+display:none;
+border:2px solid #ddd;
+padding:20px;
+margin-top:20px;
+}
+
+#ad{
+background:#ffeaa7;
+padding:15px;
+margin:15px 0;
+text-align:center;
+font-weight:bold;
+}
 </style>
+
 </head>
-<body>
+<body oncontextmenu="return false">
 
-<div class="card">
-<h2>Resume Maker</h2>
+<div class="container">
 
-<input id="n" placeholder="Name">
-<input id="s" placeholder="Skills">
-<input id="e" placeholder="Education">
+<h2>Professional Resume Builder</h2>
 
-<button onclick="mk()">Generate</button>
+<!-- ADS -->
+<div id="ad">
+Your Ad Here (Google AdSense)
+</div>
 
-<div id="show"></div>
+<input id="name" placeholder="Full Name">
+<input id="mobile" placeholder="Mobile">
+<input id="email" placeholder="Email">
+<textarea id="address" placeholder="Address"></textarea>
+
+<textarea id="objective" placeholder="Career Objective"></textarea>
+
+<textarea id="skills" placeholder="Skills (comma separated)"></textarea>
+
+<textarea id="exp" placeholder="Experience 
+Format: Company - Role - Years"></textarea>
+
+<button onclick="generate()">Generate Resume</button>
+
+<div id="resume">
+
+<h2 id="rname"></h2>
+<p><b>Mobile:</b> <span id="rmobile"></span></p>
+<p><b>Email:</b> <span id="remail"></span></p>
+<p><b>Address:</b> <span id="raddress"></span></p>
+
+<h3>Career Objective</h3>
+<p id="robjective"></p>
+
+<h3>Skills</h3>
+<p id="rskills"></p>
+
+<h3>Experience</h3>
+<p id="rexp"></p>
+
+<hr>
+
+<h3>Download Resume</h3>
+
+<button onclick="pay()">Pay ₹50 to Download</button>
+
+<p id="paymsg"></p>
+
+<button id="download" style="display:none" onclick="download()">Download PDF</button>
+
+</div>
+
 </div>
 
 <script>
-function mk(){
-show.innerHTML=
-`<b>Name:</b> ${n.value}<br>
-<b>Skills:</b> ${s.value}<br>
-<b>Education:</b> ${e.value}`;
+
+function generate(){
+
+document.getElementById("resume").style.display="block";
+
+rname.innerHTML=name.value;
+rmobile.innerHTML=mobile.value;
+remail.innerHTML=email.value;
+raddress.innerHTML=address.value;
+robjective.innerHTML=objective.value;
+rskills.innerHTML=skills.value;
+rexp.innerHTML=exp.value;
+
 }
+
+/* PAYMENT SYSTEM (TEMP DEMO) */
+
+function pay(){
+
+let ok = confirm("Pay ₹50 to Download Resume");
+
+if(ok){
+paymsg.innerHTML="Payment Successful ✔";
+document.getElementById("download").style.display="block";
+}
+}
+
+/* PDF DOWNLOAD */
+
+function download(){
+window.print();
+}
+
+/* SCREENSHOT BLOCK */
+
+document.addEventListener("keyup",function(e){
+if(e.key=="PrintScreen"){
+alert("Screenshot Disabled!");
+navigator.clipboard.writeText("");
+}
+});
+
 </script>
 
 </body>

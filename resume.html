@@ -1,184 +1,166 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Professional Resume</title>
+<title>Resume Builder</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body{
+font-family: Arial;
+margin:0;
+background:#f2f2f2;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f3f4f6;
-    line-height: 1.6;
+.container{
+display:flex;
+flex-wrap:wrap;
+max-width:1100px;
+margin:20px auto;
+gap:20px;
 }
 
-.resume {
-    max-width: 1000px;
-    margin: 30px auto;
-    background: #fff;
-    display: flex;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.form-section, .preview-section{
+flex:1 1 450px;
+background:white;
+padding:20px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-/* LEFT SIDE */
-.left {
-    width: 35%;
-    background: #111827;
-    color: white;
-    padding: 30px;
+input, textarea{
+width:100%;
+padding:8px;
+margin-bottom:10px;
 }
 
-.left h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+button{
+padding:10px;
+background:black;
+color:white;
+border:none;
+cursor:pointer;
+width:100%;
 }
 
-.left p {
-    font-size: 14px;
-    margin-bottom: 6px;
+.resume{
+display:flex;
 }
 
-.left h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    border-bottom: 1px solid #444;
-    padding-bottom: 5px;
+.left{
+width:35%;
+background:#111827;
+color:white;
+padding:20px;
 }
 
-.left ul {
-    padding-left: 18px;
+.right{
+width:65%;
+padding:20px;
 }
 
-.left li {
-    margin-bottom: 6px;
+img{
+width:100px;
+height:100px;
+border-radius:50%;
+object-fit:cover;
+margin-bottom:10px;
 }
 
-/* RIGHT SIDE */
-.right {
-    width: 65%;
-    padding: 30px;
+@media(max-width:768px){
+.resume{
+flex-direction:column;
 }
-
-.right h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+.left,.right{
+width:100%;
 }
-
-.section {
-    margin-bottom: 20px;
-}
-
-.section p {
-    font-size: 14px;
-    margin-bottom: 8px;
-}
-
-/* PROFILE PHOTO (Optional) */
-.photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-/* Responsive */
-@media(max-width:768px) {
-    .resume {
-        flex-direction: column;
-    }
-    .left, .right {
-        width: 100%;
-    }
-}
-
-/* Print Friendly */
-@media print {
-    body {
-        background: none;
-    }
-    .resume {
-        box-shadow: none;
-        margin: 0;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="resume">
+<div class="container">
 
-    <div class="left">
+<div class="form-section">
+<h2>Create Resume</h2>
 
-        <!-- PHOTO OPTIONAL (Delete img tag if not needed) -->
-        <img src="your-photo.jpg" class="photo" alt="Profile Photo">
+<input type="text" id="name" placeholder="Full Name">
+<input type="text" id="email" placeholder="Email">
+<input type="text" id="phone" placeholder="Phone">
+<input type="text" id="location" placeholder="Location">
 
-        <h1>Your Name</h1>
-        <p>Email: your@email.com</p>
-        <p>Phone: +91 XXXXX XXXXX</p>
-        <p>Location: Your City, India</p>
+<textarea id="objective" placeholder="Career Objective"></textarea>
+<input type="text" id="skills" placeholder="Skills (comma separated)">
+<input type="text" id="languages" placeholder="Languages (comma separated)">
+<input type="file" id="photo">
 
-        <h2>Skills</h2>
-        <ul>
-            <li>HTML & CSS</li>
-            <li>JavaScript</li>
-            <li>Communication</li>
-            <li>Problem Solving</li>
-        </ul>
-
-        <h2>Languages</h2>
-        <ul>
-            <li>English</li>
-            <li>Hindi</li>
-        </ul>
-
-    </div>
-
-    <div class="right">
-
-        <div class="section">
-            <h2>Career Objective</h2>
-            <p>
-                Motivated and detail-oriented professional seeking an opportunity 
-                to apply my skills and contribute effectively to organizational growth.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Education</h2>
-            <p><strong>Bachelor of Technology</strong></p>
-            <p>XYZ University | 2021 - 2025</p>
-            <p>CGPA: 8.2</p>
-        </div>
-
-        <div class="section">
-            <h2>Experience</h2>
-            <p><strong>Web Developer Intern</strong></p>
-            <p>ABC Company | 2024</p>
-            <p>
-                Worked on responsive website development and improved UI performance.
-            </p>
-        </div>
-
-        <div class="section">
-            <h2>Projects</h2>
-            <p><strong>Resume Builder Website</strong></p>
-            <p>Developed an ATS-friendly resume builder using HTML and CSS.</p>
-        </div>
-
-    </div>
+<button onclick="generateResume()">Generate Resume</button>
+<button onclick="window.print()">Download PDF</button>
 
 </div>
+
+<div class="preview-section">
+<div id="resumeOutput"></div>
+</div>
+
+</div>
+
+<script>
+function generateResume(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let phone=document.getElementById("phone").value;
+let location=document.getElementById("location").value;
+let objective=document.getElementById("objective").value;
+let skills=document.getElementById("skills").value.split(",");
+let languages=document.getElementById("languages").value.split(",");
+let photo=document.getElementById("photo").files[0];
+
+let photoHTML="";
+if(photo){
+let url=URL.createObjectURL(photo);
+photoHTML="<img src='"+url+"'>";
+}
+
+let skillList="";
+skills.forEach(s=>{
+if(s.trim()!=""){
+skillList+="<li>"+s+"</li>";
+}
+});
+
+let langList="";
+languages.forEach(l=>{
+if(l.trim()!=""){
+langList+="<li>"+l+"</li>";
+}
+});
+
+document.getElementById("resumeOutput").innerHTML=
+`
+<div class="resume">
+<div class="left">
+${photoHTML}
+<h2>${name}</h2>
+<p>${email}</p>
+<p>${phone}</p>
+<p>${location}</p>
+<h3>Skills</h3>
+<ul>${skillList}</ul>
+<h3>Languages</h3>
+<ul>${langList}</ul>
+</div>
+
+<div class="right">
+<h3>Career Objective</h3>
+<p>${objective}</p>
+</div>
+</div>
+`;
+
+}
+</script>
 
 </body>
 </html>

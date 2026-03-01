@@ -1,3 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free Resume Maker Online | ATS Friendly Resume Builder India</title>
+<meta name="description" content="Create professional ATS friendly resume online in India. Modern 2 column resume builder with PDF download option.">
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>IndiaDocs Lab - Resume Builder</h1>
+</header>
+
+<main class="container">
+
+<section class="form-section">
+    <h2>Create Resume</h2>
+    <form id="resumeForm">
+
+        <input type="text" id="fullName" placeholder="Full Name" required>
+        <input type="tel" id="mobile" placeholder="Mobile Number" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <textarea id="address" placeholder="Address" required></textarea>
+
+        <textarea id="objective" placeholder="Career Objective" required></textarea>
+
+        <input type="text" id="skills" placeholder="Skills (comma separated)" required>
+
+        <input type="text" id="languages" placeholder="Languages (comma separated)" required>
+        <input type="text" id="hobbies" placeholder="Hobbies (comma separated)" required>
+
+        <input type="file" id="photo" accept="image/*">
+
+        <button type="submit">Generate Resume</button>
+    </form>
+</section>
+
+<section class="preview-section">
+    <h2>Preview</h2>
+
+    <div id="resumeOutput" class="resume">
+        <!-- Resume generated here -->
+    </div>
+
+    <button id="downloadBtn">Download PDF (₹50)</button>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+}
+
+header {
+    background: #111;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+}
+
+.form-section, .preview-section {
+    flex: 1 1 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+form input, form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+button {
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.resume {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    padding: 20px;
+    color: black;
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+.resume-header img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.resume-body {
+    display: flex;
+    margin-top: 20px;
+}
+
+.left {
+    width: 35%;
+    padding-right: 15px;
+    border-right: 1px solid #ccc;
+}
+
+.right {
+    width: 65%;
+    padding-left: 15px;
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+@media(max-width:768px){
+    .resume-body{
+        flex-direction: column;
+    }
+    .left, .right{
+        width:100%;
+        border:none;
+        padding:0;
+    }
+}
 document.getElementById("resumeForm").addEventListener("submit", function(e){
     e.preventDefault();
     generateResume();
